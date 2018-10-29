@@ -1,0 +1,29 @@
+.mobile-burger {
+    height: 55px;
+    position: fixed;
+    display: block;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    background-color: rgb(13, 42, 105);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-burger:scroll {
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+.moveOut {
+    animation: moveOut 1s;
+}
+
+@keyframes moveOut {
+    0% {
+        transform: translateX(0);        
+    }
+
+    100% {
+        transform: translateX(-100%);  
+    }
+}

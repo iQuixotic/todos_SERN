@@ -1,0 +1,80 @@
+.Sidedrawer {
+    height: 100%;
+    width: 75%;
+    position: fixed;
+    background-color: rgb(236, 236, 236);
+    justify-content: space-between;
+    box-sizing: border-box;
+    z-index: 201;
+    border-right: 1px solid rgb(91, 150, 206);
+    box-shadow: 0 2px 17px 1px rgba(4, 91, 173, 0.5);
+    animation: moveIn 1s;
+}
+
+#Sidedrawer-Logo {
+    position: relative;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+    animation: fadeIn 2s;
+}
+
+#Sidedrawer_ul li {
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+    float: none;
+}
+
+#Sidedrawer_ul {
+    font-size: 3.5rem;
+    display: block;
+    padding: 3rem 0;
+    position: absolute;
+    top: 20%;
+}
+
+#Sidedrawer_ul li a {
+    padding: 1rem 2rem;
+    position: relative;
+    display: block;
+    width: 100%;
+    color: black ;
+}
+
+
+#Sidedrawer_ul li:hover {
+    border-bottom: 2px solid rgb(53, 207, 53);
+    color: whitesmoke;    
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.Sidedrawer nav {
+    width: 100%;
+    background-color: rgba(39, 6, 32, 0);
+}
+
+@keyframes moveIn {
+    0% {
+        transform: translateX(-100%);        
+    }
+
+    100% {
+        transform: translateX(0);  
+    }
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;       
+    }
+    50% {
+        opacity: 0;       
+    }
+
+    100% {
+        opacity: 1;  
+    }
+}
