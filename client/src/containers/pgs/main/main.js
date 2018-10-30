@@ -14,6 +14,8 @@ class Main extends React.Component {
       // console.log(res.data)
         // .then(res => this.setState({ all: res.data }))
         .then(res => console.log(res.data ))
+        .then(res => console.log('did i do a good ?'))
+
 
         // .then(() => this.setState({ loading: false }))
         // .catch(err => { throw err });

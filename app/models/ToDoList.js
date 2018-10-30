@@ -4,10 +4,12 @@ const orm = require("../config/orm.js");
 
 let ToDoList = {
   all: function(cb) {
-    orm.all((cb) => {
-      // cb(res);
-      console.log('this is ', res)
-      console.log(cb)
+    orm.all((res) => {
+      cb(res);
+      // console.log('this is ', res)
+      console.log(cb.toString(), 'cb')
+      console.log(res, 'res')
+
     });
   },
   // The variables cols and vals are arrays.

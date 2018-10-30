@@ -30,7 +30,7 @@ objToSql = (obj) => {
   return arr.toString();
 }
 
-// SQL statement functions.
+// SQL statement functions
 const orm = {
   all: (cb) => {
     let queryStr = "SELECT * FROM todos;";
@@ -38,9 +38,10 @@ const orm = {
       if (err) {
         throw err;
       }
-      console.log(result)
-      return result;
-      // cb(result);
+      // console.log(cb.toString())
+      // console.log(result)
+      // return result;
+      cb(result);
     });
   },
   create: (cols, vals, cb) => {

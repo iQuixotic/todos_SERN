@@ -17,14 +17,16 @@ module.exports = {
 
     // READ all users
     read: (req, res) => {
-      console.log('im try harder')
-        db.all(function(res) {
+      let something = res;
+        db.all((something) => {
           let obj = {
-            data: res
+            data: something
           }
-          // res.json(obj)
+          // res.json(obj);
+          console.log(obj)
         })
-          // .then((dbModel) => { res.json(dbModel) })
+        // return obj;
+          .then(() => { res.json(obj) })
           // .catch(err => res.json(err));
     },
 
