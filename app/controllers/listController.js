@@ -1,4 +1,5 @@
 const db = require('../models/ToDoList');
+const connection = require('../config/connection');
 
 // var express = require("express");
 // var router = express.Router();
@@ -16,18 +17,16 @@ module.exports = {
     },
 
     // READ all users
-    read: (req, res) => {
-      let something = res;
-        db.all((something) => {
-          let obj = {
-            data: something
-          }
-          // res.json(obj);
-          console.log(obj)
-        })
-        // return obj;
-          .then(() => { res.json(obj) })
-          // .catch(err => res.json(err));
+    read: (req, res) => { 
+      // connection.connect();
+
+      connection.query('SELECT * FROM todos', function (error, results, fields) {
+        if (error) throw error;
+        res.send(results)
+      })
+  
+      // connection.end();
+  // }
     },
 
     // UPDATE list item
