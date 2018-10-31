@@ -1,31 +1,4 @@
 const secret = require('./secret');
-// const mysql = require("mysql");
-
-// // if deployed
-// if(process.env.JAWSDB_URL) {
-//   myConnection = mysql.createConnection(process.env.JAWSDB_URL);
-// } else {
-
-//   // if using local connection
-//   myConnection = mysql.createConnection({
-//     port: 3306,
-//     host: "localhost",
-//     user: secret.DB_USER,
-//     password: secret.DB_PASSWORD,
-//     database: "example_db"
-// });
-// };
-
-// connection.connect(function(err) {
-//   if (err) {
-//     console.error("error connecting: " + err.stack);
-//     return;
-//   }
-// });
-
-// module.exports = connection;
-
-
 const mysql = require("mysql");
 
 let connection;

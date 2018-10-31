@@ -1,8 +1,5 @@
-const db = require('../models/ToDoList');
+const db = require('../models/queries');
 const connection = require('../config/connection');
-
-// var express = require("express");
-// var router = express.Router();
 
 module.exports = {
     
@@ -18,15 +15,10 @@ module.exports = {
 
     // READ all users
     read: (req, res) => { 
-      // connection.connect();
-
-      connection.query('SELECT * FROM todos', function (error, results, fields) {
+      connection.query(db.getAll(), (error, results, fields) => {
         if (error) throw error;
         res.send(results)
       })
-  
-      // connection.end();
-  // }
     },
 
     // UPDATE list item
