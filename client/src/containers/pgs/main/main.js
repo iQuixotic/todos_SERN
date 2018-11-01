@@ -6,33 +6,45 @@ import './style.css';
 
 class Main extends React.Component {
     state = {
-        all: '',
+               all: [{
+                 id: '',
+                crossed: '',
+                action: ''
+              }],
         loading: false
     }
     componentWillMount() {
       API.getAll()      
       // console.log(res.data)
-        // .then(res => this.setState({ all: res.data }))
-        .then(res => console.log(res.data ))
-        .then(res => console.log('did i do a good ?'))
+        .then(res => this.setState({ all: res.data.obj }))
+        .then(res => console.log(this.state.all ))
+        // .then(res => console.log(this.state.all))
 
 
         // .then(() => this.setState({ loading: false }))
-        // .catch(err => { throw err });
+        .catch(err => { throw err });
     }
 
   render() {
-    // const postItems = this.props.posts.map(post => (
-    //   <div key = {post.id}>
-    //     <h3>{post.title}</h3>
-    //     <p>{post.body}</p>
-    //   </div>
-    // ))
+    const myTable = 
+    ( 
+      // this.state.all[0].action
+    <div>
+    {
+      this.state.all.map(each => (
+        <div key={each.id}>
+          <h3>{each.crossed}</h3>
+          <p>{each.action}</p>
+        </div>
+      ))
+    }
+    </div>
+    )
+    
     return (
       <Layout>
-
-       <div>hello</div>
-       <div>{this.state.all}</div>
+       <div>{myTable}</div>
+       {/* <div>{this.state.all.obj}</div> */}
       </Layout>
     );
   }

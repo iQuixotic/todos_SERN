@@ -15,9 +15,11 @@ module.exports = {
 
     // READ all users
     read: (req, res) => { 
+      
       connection.query(db.getAll(), (error, results, fields) => {
         if (error) throw error;
-        res.send(results)
+        // res.send(results)
+        res.send({ obj: results })
       })
     },
 
