@@ -20,15 +20,18 @@ class Main extends React.Component {
     this.componentWillMount = () => {
       // this.setState({ loading: true })
         // .then(() => API.getAll())
-        API.getAll()
-        .then(res => this.setState({ all: res.data.obj }))
-        .then(() => console.log(this.state.all ))
-        .catch(err => { throw err });
+        this.getDBstuff()
     }
     this.componentDidMount = () => {
       this.setState({ loading: false })
     }
-
+  }
+  
+  getDBstuff = () => {
+    API.getAll()
+    .then(res => this.setState({ all: res.data.obj }))
+    .then(() => console.log(this.state.all ))
+    .catch(err => { throw err });
   }
   
     changeHandler = (e) => {
@@ -46,7 +49,22 @@ class Main extends React.Component {
    submitHandler = (arg) => {     
       console.log(arg)
       API.createNewListItem(arg)
+      this.resetInputFields()
     }
+
+    resetInputFields = () => {
+      const mainInput = document.getElementById('input_add-new-todo');
+      mainInput.value = ''
+      this.resetSt()
+    }
+
+    resetSt = () => {
+      this.setState({
+        action: []
+      })
+      this.getDBstuff();
+    }
+  
   
 
   render() {
@@ -67,7 +85,7 @@ class Main extends React.Component {
     
     return (
       <Layout>
-        <input onChange={this.changeHandler} type='text' name='action' />
+        <input id='input_add-new-todo' onChange={this.changeHandler} type='text' name='action' />
         <button onClick={this.dataHandler}>SEND DATA</button>
        <div>{myTable}</div>
        {/* <div>{this.state.all.obj}</div> */}
