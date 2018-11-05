@@ -5,12 +5,19 @@ module.exports = {
     
     // CREATE a new db entry for users
     create: (req, res) => {
-        db.create(["crossed", "action"], 
-        [req.body.crossed, req.body.action], 
-        (result) => {
-          // Send back the ID
-          res.json({ id: result.insertId });
-        });
+
+      connection.query(db.create(), (error, results, fields) => {
+        if (error) throw error;
+        // res.send(results)
+        res.send({ obj: results })
+      })
+
+        // db.create(["crossed", "action"], 
+        // [req.body.crossed, req.body.action], 
+        // (result) => {
+        //   // Send back the ID
+        //   res.json({ id: result.insertId });
+        // });
     },
 
     // READ all users

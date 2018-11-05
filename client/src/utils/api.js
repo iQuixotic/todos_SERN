@@ -5,7 +5,7 @@ export default {
 
     // CREATE 
     createNewListItem: (data) => {     
-        return axios.put('/list', data);
+        return axios.post('/list', data);
     },
 
     // READ 

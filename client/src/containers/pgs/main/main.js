@@ -5,7 +5,11 @@ import { API } from "../../../utils";
 import './style.css';
 
 class Main extends React.Component {
-    state = {
+  constructor(props) {
+    super(props)
+    this.changeHandler = this.changeHandler.bind(this)
+    this.state = {
+      action: [],
                all: [{
                  id: '',
                 crossed: '',
@@ -13,17 +17,37 @@ class Main extends React.Component {
               }],
         loading: false
     }
-    componentWillMount() {
-      API.getAll()      
-      // console.log(res.data)
+    this.componentWillMount = () => {
+      // this.setState({ loading: true })
+        // .then(() => API.getAll())
+        API.getAll()
         .then(res => this.setState({ all: res.data.obj }))
-        .then(res => console.log(this.state.all ))
-        // .then(res => console.log(this.state.all))
-
-
-        // .then(() => this.setState({ loading: false }))
+        .then(() => console.log(this.state.all ))
         .catch(err => { throw err });
     }
+    this.componentDidMount = () => {
+      this.setState({ loading: false })
+    }
+
+  }
+  
+    changeHandler = (e) => {
+      this.setState({ [e.target.name]: e.target.value })
+      console.log(this.state.action, 'this action is')
+    }
+
+    dataHandler = () => {
+      const data = {
+        action: this.state.action,
+      }
+      this.submitHandler(data)
+    }
+
+   submitHandler = (arg) => {     
+      console.log(arg)
+      API.createNewListItem(arg)
+    }
+  
 
   render() {
     const myTable = 
@@ -43,6 +67,8 @@ class Main extends React.Component {
     
     return (
       <Layout>
+        <input onChange={this.changeHandler} type='text' name='action' />
+        <button onClick={this.dataHandler}>SEND DATA</button>
        <div>{myTable}</div>
        {/* <div>{this.state.all.obj}</div> */}
       </Layout>
