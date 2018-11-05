@@ -6,7 +6,7 @@ module.exports = {
     // CREATE a new db entry for users
     create: (req, res) => {
 
-      connection.query(db.create(), (error, results, fields) => {
+      connection.query(db.create(req.body.action), (error, results, fields) => {
         if (error) throw error;
         // res.send(results)
         res.send({ obj: results })
