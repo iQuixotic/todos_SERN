@@ -26,7 +26,7 @@ class Main extends React.Component {
       this.setState({ loading: false })
     }
   }
-  
+
   getDBstuff = () => {
     API.getAll()
     .then(res => this.setState({ all: res.data.obj }))
@@ -85,10 +85,12 @@ class Main extends React.Component {
     
     return (
       <Layout>
+        <div className='container'>
         <input id='input_add-new-todo' onChange={this.changeHandler} type='text' name='action' />
         <button onClick={this.dataHandler}>SEND DATA</button>
        <div>{myTable}</div>
        {/* <div>{this.state.all.obj}</div> */}
+       </div>
       </Layout>
     );
   }
