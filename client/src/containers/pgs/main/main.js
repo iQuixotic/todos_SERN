@@ -74,7 +74,8 @@ class Main extends React.Component {
     <div>
     {
       this.state.all.map(each => (
-        <div key={each.id}>
+        <div key={each.id} className={each.crossed ? 'completed' : ''}>
+        
           <h3>{each.crossed}</h3>
           <p>{each.action}</p>
         </div>
@@ -85,7 +86,7 @@ class Main extends React.Component {
     
     return (
       <Layout>
-        <div className='container'>
+        <div className='container main-pg'>
         <input id='input_add-new-todo' onChange={this.changeHandler} type='text' name='action' />
         <button onClick={this.dataHandler}>SEND DATA</button>
        <div>{myTable}</div>
