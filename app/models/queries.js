@@ -8,7 +8,7 @@ let queries = {
   // The variables cols and vals are arrays.
   create: function(arg) {
     // let act = req.body.action;
-    console.log('THIS IS THE ACT prease', arg)
+    // console.log('THIS IS THE ACT prease', arg)
     return `INSERT INTO todos (crossed, action) VALUES (false, '${arg}')`;
   },
   update: function(objColVals, condition, cb) {

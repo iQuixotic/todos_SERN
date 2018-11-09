@@ -8,6 +8,7 @@ class Main extends React.Component {
   constructor(props) {
     super(props)
     this.changeHandler = this.changeHandler.bind(this)
+    this.checkboxChangeHandler = this.checkboxChangeHandler.bind(this)
     this.state = {
       action: [],
                all: [{
@@ -65,6 +66,13 @@ class Main extends React.Component {
       this.getDBstuff();
     }
   
+    checkboxChangeHandler = (e) => {
+    let all = this.state.all;
+    let mine = all[e.target.id-1]
+    mine.crossed = !mine.crossed;
+    all[e.target.id-1].crossed = mine.crossed;
+    this.setState({ all: all })
+    }
   
 
   render() {
@@ -74,10 +82,9 @@ class Main extends React.Component {
     <div>
     {
       this.state.all.map(each => (
-        <div key={each.id} className={each.crossed ? 'completed' : ''}>
-        
-          <h3>{each.crossed}</h3>
-          <p>{each.action}</p>
+        <div key={each.id} className={each.crossed ? 'completed' : ''}>        
+          {/* <h3>{each.crossed}</h3> */}
+          <p><input type='checkbox' id={each.id} onChange={this.checkboxChangeHandler}/>{each.action}</p>
         </div>
       ))
     }
