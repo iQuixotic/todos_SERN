@@ -7,7 +7,7 @@ router.route('/')
     .post(listController.create)
 
 router.route('/:id')
-    .put(listController.update)
+    .post(listController.update)
     .delete(listController.delete)
 
     

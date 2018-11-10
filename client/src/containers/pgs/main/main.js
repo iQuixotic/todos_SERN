@@ -4,6 +4,7 @@ import { API } from "../../../utils";
 
 import './style.css';
 
+let all, mine;
 class Main extends React.Component {
   constructor(props) {
     super(props)
@@ -67,12 +68,23 @@ class Main extends React.Component {
     }
   
     checkboxChangeHandler = (e) => {
-    let all = this.state.all;
-    let mine = all[e.target.id-1]
-    mine.crossed = !mine.crossed;
-    all[e.target.id-1].crossed = mine.crossed;
-    this.setState({ all: all })
+      
+      all = this.state.all;
+      mine = all[e.target.id-1]
+      mine.crossed = !mine.crossed;
+      all[e.target.id-1].crossed = mine.crossed;
+      this.setState({ all: all })    
+      const data = {
+        crossed: mine.crossed
+      }
+      // .then(() => 
+      API.updateOne(data, e.target.id)
+      // .catch(err => { throw err });
+
     }
+
+    // editCheckboxState = (e) => {
+    // }
   
 
   render() {

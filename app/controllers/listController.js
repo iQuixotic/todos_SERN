@@ -32,20 +32,12 @@ module.exports = {
 
     // UPDATE list item
     update: (req, res) => {
-        let id = `id = ${req.params.id}`;
-        db.update(
-          {
-            crossed: req.body.crossed,
-            action: req.body.action
-          },
-          id,
-          (result) => {
-            if (result.changedRows === 0) {
-              return res.status(404).end();
-            }
-            res.status(200).end();      
-          }
-        );
+      console.log(req.params.id, req.body)
+      connection.query(db.update(req.params.id, req.body.crossed), (error, results, fields) => {
+        if (error) throw error;
+        // res.send(results)
+        res.send({ obj: results })
+      })
       },
 
     // DELETE
