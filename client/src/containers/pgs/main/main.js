@@ -10,6 +10,7 @@ class Main extends React.Component {
     super(props)
     this.changeHandler = this.changeHandler.bind(this)
     this.checkboxChangeHandler = this.checkboxChangeHandler.bind(this)
+    this.historyHandler = this.historyHandler.bind(this)
     this.state = {
       action: [],
                all: [{
@@ -17,16 +18,27 @@ class Main extends React.Component {
                 crossed: '',
                 action: ''
               }],
+              history: [{
+                id: '',
+               crossed: '',
+               action: ''
+             }],
         loading: false
     }
     this.componentWillMount = () => {
-      // this.setState({ loading: true })
-        // .then(() => API.getAll())
         this.getDBstuff()
+        this.getHistory()
     }
     this.componentDidMount = () => {
       this.setState({ loading: false })
     }
+  }
+
+  getHistory = () => {
+    API.getHistory()
+    .then(res => this.setState({ history: res.data.obj }))
+    .then(() => console.log(this.state.history ))
+    .catch(err => { throw err });
   }
 
   getDBstuff = () => {
@@ -66,50 +78,85 @@ class Main extends React.Component {
       })
       this.getDBstuff();
     }
+
+    findById = (arg, arg2) => {
+      let returnVal;
+      arg.forEach(elem => {
+        if(elem.id === arg2) {
+          console.log(elem)
+          returnVal = elem;
+        } 
+      });
+      console.log(returnVal)
+      return returnVal;
+    }
   
     checkboxChangeHandler = (e) => {
       
       all = this.state.all;
-      mine = all[e.target.id-1]
-      mine.crossed = !mine.crossed;
-      all[e.target.id-1].crossed = mine.crossed;
+     
+      let found = this.findById(all, parseInt(e.target.id))
+      mine = found;
+      mine.crossed = !found.crossed;
+      all.forEach(elem => {
+        if(elem.id === found.id) {
+          elem = found;
+        }
+      });
       this.setState({ all: all })    
       const data = {
         crossed: mine.crossed
       }
-      // .then(() => 
       API.updateOne(data, e.target.id)
-      // .catch(err => { throw err });
-
     }
 
-    // editCheckboxState = (e) => {
-    // }
-  
+    historyHandler = () => {
+      let data;
+      // let arr =[];
+      all.forEach(elem => {
+        data = { action: elem.action, id: elem.id }
+        if(elem.crossed) {
+          // arr.push(data);
+          API.addSelectedToHistory(data)
+          this.deleteListItem(data)
+        } 
+      });
+    }
+
+  deleteListItem = (data) => {
+    API.deleteLI(data, data.id)
+  }
 
   render() {
-    const myTable = 
-    ( 
+    let myTable = 
+    (arg) => { 
+      return ( 
       // this.state.all[0].action
     <div>
     {
-      this.state.all.map(each => (
+      arg.map(each => (
         <div key={each.id} className={each.crossed ? 'completed' : ''}>        
-          {/* <h3>{each.crossed}</h3> */}
-          <p><input type='checkbox' id={each.id} onChange={this.checkboxChangeHandler}/>{each.action}</p>
+          <p><input type='checkbox' id={each.id}
+          checked={each.crossed ? 'crossed': ''}
+          onChange={this.checkboxChangeHandler}
+          />{each.action}</p>
         </div>
       ))
     }
     </div>
     )
+  }
     
     return (
       <Layout>
         <div className='container main-pg'>
-        <input id='input_add-new-todo' onChange={this.changeHandler} type='text' name='action' />
-        <button onClick={this.dataHandler}>SEND DATA</button>
-       <div>{myTable}</div>
-       {/* <div>{this.state.all.obj}</div> */}
+          <input id='input_add-new-todo' onChange={this.changeHandler} type='text' name='action' />
+          <button onClick={this.dataHandler}>SEND DATA</button>
+          <div>{myTable(this.state.all)}</div>
+          <button onClick={this.historyHandler}>DONE</button>
+       <div>
+          <div>{myTable(this.state.history)}</div>
+       </div>
        </div>
       </Layout>
     );

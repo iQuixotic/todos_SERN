@@ -9,6 +9,5 @@ router.route('/')
 router.route('/:id')
     .post(listController.update)
     .delete(listController.delete)
-
     
 module.exports = router;

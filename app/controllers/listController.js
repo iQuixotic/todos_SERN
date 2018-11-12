@@ -12,12 +12,6 @@ module.exports = {
         res.send({ obj: results })
       })
 
-        // db.create(["crossed", "action"], 
-        // [req.body.crossed, req.body.action], 
-        // (result) => {
-        //   // Send back the ID
-        //   res.json({ id: result.insertId });
-        // });
     },
 
     // READ all users
@@ -35,17 +29,16 @@ module.exports = {
       console.log(req.params.id, req.body)
       connection.query(db.update(req.params.id, req.body.crossed), (error, results, fields) => {
         if (error) throw error;
-        // res.send(results)
         res.send({ obj: results })
       })
       },
 
     // DELETE
     delete: (req, res) => {
-      let id = `id = ${req.params.id}`;
-      db.delete(
-        id
-      );
-    }
-
+      console.log('this is THE DELETE THING', req.params.id, req.body)
+      connection.query(db.update(req.params.id, req.body.crossed), (error, results, fields) => {
+        if (error) throw error;
+        res.send({ obj: results })
+      })
+      }
 }

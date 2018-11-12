@@ -8,9 +8,13 @@ export default {
         return axios.post('/list', data);
     },
 
+    addSelectedToHistory: (data) => {
+        console.log(data)
+        return axios.post('/history', data);
+    },
+
     // READ 
     getAll: () => {     
-        console.log('i have got the all son')
         return axios.get('/list');
     },
 
@@ -24,7 +28,8 @@ export default {
     },
 
     // DELETE
-    delListItem: (data, id) => {     
+    deleteLI: (data, id) => {     
+        console.log('this is it', data, id)
         return axios.delete('/list/' + id, data);
     }
 

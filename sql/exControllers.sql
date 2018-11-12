@@ -1,0 +1,4 @@
+-- CREATE TABLE 'todosHistory' (
+--      'id' INT NOT NULL , 
+--      'crossed' BOOLEAN NOT NULL ,
+--      'action' VARCHAR NOT NULL ) 
