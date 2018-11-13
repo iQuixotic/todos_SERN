@@ -5,5 +5,9 @@ const historyController = require('../controllers/historyController');
 router.route('/')
     .get(historyController.read)
     .post(historyController.create)
-    
+
+
+router.route('/:id')
+    .delete(historyController.delete)
+
 module.exports = router;

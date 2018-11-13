@@ -26,6 +26,7 @@ module.exports = {
 
     // UPDATE list item
     update: (req, res) => {
+      console.log('sonething something something dark side')
       console.log(req.params.id, req.body)
       connection.query(db.update(req.params.id, req.body.crossed), (error, results, fields) => {
         if (error) throw error;
@@ -36,7 +37,7 @@ module.exports = {
     // DELETE
     delete: (req, res) => {
       console.log('this is THE DELETE THING', req.params.id, req.body)
-      connection.query(db.update(req.params.id, req.body.crossed), (error, results, fields) => {
+      connection.query(db.delete(req.params.id, req.body.crossed), (error, results, fields) => {
         if (error) throw error;
         res.send({ obj: results })
       })

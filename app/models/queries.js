@@ -22,11 +22,24 @@ let queries = {
 
     return `INSERT INTO todosHistory (id, crossed, action) VALUES ('${id}', false, '${action}')`;
   },
+
   update: function(id, data) {
     console.log(id, 'di', data, 'data')
     console.log(`UPDATE todos SET crossed = ${data} WHERE id = ${id}`)
     return `UPDATE todos SET crossed = ${data} WHERE id = ${id}`;
-  }
+  },
+
+  
+  delete: function(id, data) {
+    console.log(`DELETE FROM todos WHERE id = ${id}`)
+    return `DELETE FROM todos WHERE id = ${id}`;
+  },
+
+  deleteHistory: function(id, data) {
+    console.log(`DELETE FROM todosHistory WHERE id = ${id}`)
+    return `DELETE FROM todosHistory WHERE id = ${id}`;
+  },
+  
 };
 
 module.exports = queries;

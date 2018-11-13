@@ -24,4 +24,11 @@ module.exports = {
         })
       },
 
+      delete:  (req, res) => {
+        console.log('this is THE DELETEfdsafdsaafdsaafdsafdsa', req.params.id, req.body)
+        connection.query(db.deleteHistory(req.params.id, req.body.crossed), (error, results, fields) => {
+          if (error) throw error;
+          res.send({ obj: results })
+        })
+        }
 }

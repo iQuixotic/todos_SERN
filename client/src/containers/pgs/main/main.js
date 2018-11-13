@@ -4,7 +4,7 @@ import { API } from "../../../utils";
 
 import './style.css';
 
-let all, mine;
+let all, history, mine;
 class Main extends React.Component {
   constructor(props) {
     super(props)
@@ -50,7 +50,6 @@ class Main extends React.Component {
   
     changeHandler = (e) => {
       this.setState({ [e.target.name]: e.target.value })
-      console.log(this.state.action, 'this action is')
     }
 
     dataHandler = () => {
@@ -61,7 +60,6 @@ class Main extends React.Component {
     }
 
    submitHandler = (arg) => {     
-      console.log(arg)
       API.createNewListItem(arg)
       this.resetInputFields()
     }
@@ -83,19 +81,22 @@ class Main extends React.Component {
       let returnVal;
       arg.forEach(elem => {
         if(elem.id === arg2) {
-          console.log(elem)
           returnVal = elem;
         } 
       });
-      console.log(returnVal)
       return returnVal;
     }
   
     checkboxChangeHandler = (e) => {
       
       all = this.state.all;
-     
-      let found = this.findById(all, parseInt(e.target.id))
+      history = this.state.history;
+      let found = (
+        this.findById(all, parseInt(e.target.id)) === undefined ?
+        this.findById(history, parseInt(e.target.id)) : 
+        this.findById(all, parseInt(e.target.id))
+      )
+      // let found2 = this.findById(history, parseInt(e.target.id))
       mine = found;
       mine.crossed = !found.crossed;
       all.forEach(elem => {
@@ -113,25 +114,45 @@ class Main extends React.Component {
     historyHandler = () => {
       let data;
       // let arr =[];
-      all.forEach(elem => {
+      this.state.all.forEach(elem => {
         data = { action: elem.action, id: elem.id }
         if(elem.crossed) {
-          // arr.push(data);
           API.addSelectedToHistory(data)
-          this.deleteListItem(data)
+          this.deleteListItem(data, true)
         } 
       });
     }
 
-  deleteListItem = (data) => {
-    API.deleteLI(data, data.id)
+    eraseHistoryHandler = () => {
+      let data;
+      this.state.history.forEach(elem => {
+        data = { action: elem.action, id: elem.id }
+        if(elem.crossed) {
+          this.deleteListItem(data, false)
+        }
+      })
+    }
+
+  deleteListItem = (data, bool) => {
+    if(bool) {
+      API.deleteLI(data)
+      .then(() => this.getDBstuff())
+      .then(() => this.getHistory())
+      .catch(err => { throw err });
+    } else {
+      console.log('NOPEEEE')
+      API.deletItemFromHistory(data)
+        .then(() => this.getDBstuff())
+        .then(() => this.getHistory())
+        .catch(err => { throw err });
+    }
+    
   }
 
   render() {
     let myTable = 
     (arg) => { 
       return ( 
-      // this.state.all[0].action
     <div>
     {
       arg.map(each => (
@@ -156,6 +177,7 @@ class Main extends React.Component {
           <button onClick={this.historyHandler}>DONE</button>
        <div>
           <div>{myTable(this.state.history)}</div>
+          <button onClick={this.eraseHistoryHandler}>GET IT OUTTA HERE</button>
        </div>
        </div>
       </Layout>

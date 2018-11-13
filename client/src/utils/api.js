@@ -9,8 +9,8 @@ export default {
     },
 
     addSelectedToHistory: (data) => {
-        console.log(data)
-        return axios.post('/history', data);
+        console.log(data, data.id)
+        return axios.post('/history/', data);
     },
 
     // READ 
@@ -28,9 +28,13 @@ export default {
     },
 
     // DELETE
-    deleteLI: (data, id) => {     
-        console.log('this is it', data, id)
-        return axios.delete('/list/' + id, data);
+    deleteLI: (data) => {     
+        return axios.delete('/list/' + data.id, data);
+    },
+
+    deletItemFromHistory: (data) => {
+        console.log('THISBE deleteItemFromHistory', data, data.id)
+        return axios.delete('/history/' + data.id, data);
     }
 
 };
