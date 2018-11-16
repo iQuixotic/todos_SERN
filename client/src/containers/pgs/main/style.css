@@ -11,6 +11,11 @@
     background: rgb(241, 250, 249);
     display: flex;
 }
+
+.margin-top {
+    margin-top: 30px;
+}
+
 .completed {
     text-decoration: line-through;
     color: green;

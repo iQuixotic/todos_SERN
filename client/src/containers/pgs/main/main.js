@@ -170,10 +170,10 @@ class Main extends React.Component {
     
     return (
       <Layout>
-        <div className='container main-pg'>
+        <div className='container main-pg margin-top'>
           <input id='input_add-new-todo' onChange={this.changeHandler} type='text' name='action' />          
           <button onClick={this.dataHandler}>SEND DATA</button>
-          <div className='flex'>
+          <div className='flex margin-top'>
             <div className='left-col'>
             <div>{myTable(this.state.all)}</div>
             <button onClick={this.historyHandler}>DONE</button>
