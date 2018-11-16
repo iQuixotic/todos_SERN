@@ -4,10 +4,11 @@
 }
 
 .main-pg {
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .flex {
+    background: rgb(241, 250, 249);
     display: flex;
 }
 .completed {
@@ -16,9 +17,11 @@
 }
 
 .left-col {
+    width: 50%;
     color: blue;
 }
 
 .right-col {
+    width: 50%;
     color: purple;
 }
