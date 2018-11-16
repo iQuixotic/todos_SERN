@@ -12,9 +12,14 @@
     display: flex;
 }
 
-.btn-group {
-
+.heading {
+    text-align: center;
+    background: rgb(68, 68, 68);
+    color: white;
 }
+/* .btn-group {
+
+} */
 
 .half-width {
     width: 50%;

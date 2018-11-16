@@ -176,10 +176,12 @@ class Main extends React.Component {
           <div className='flex margin-top'>
 
             <div className='left-col'>
+            <div className='heading'>Current</div>
               <div>{myTable(this.state.all)}</div>
             </div>
           
             <div className='right-col'>
+            <div className='heading'>History</div>
               <div>{myTable(this.state.history)}</div>
             </div>
           </div>
