@@ -12,6 +12,14 @@
     display: flex;
 }
 
+.btn-group {
+
+}
+
+.half-width {
+    width: 50%;
+}
+
 .margin-top {
     margin-top: 30px;
 }

@@ -5,8 +5,9 @@ import './style.css';
 const NavItems = (props) => {
     return (
         <nav className='nav-items'>
-             <li>To Do<a href={props.link1}>{props.children}</a></li>
-             <li>History<a href={props.link2}>{props.children}</a></li>
+        Todo List
+             {/* <li>To Do<a href={props.link1}>{props.children}</a></li>
+             <li>History<a href={props.link2}>{props.children}</a></li> */}
         </nav>
     );
 }

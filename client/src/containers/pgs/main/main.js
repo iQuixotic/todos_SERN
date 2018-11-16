@@ -174,18 +174,22 @@ class Main extends React.Component {
           <input id='input_add-new-todo' onChange={this.changeHandler} type='text' name='action' />          
           <button onClick={this.dataHandler}>SEND DATA</button>
           <div className='flex margin-top'>
+
             <div className='left-col'>
-            <div>{myTable(this.state.all)}</div>
-            <button onClick={this.historyHandler}>DONE</button>
-          </div>
+              <div>{myTable(this.state.all)}</div>
+            </div>
           
-          <div className='right-col'>
-            <div>{myTable(this.state.history)}</div>
-            <button onClick={this.eraseHistoryHandler}>GET IT OUTTA HERE</button>
+            <div className='right-col'>
+              <div>{myTable(this.state.history)}</div>
+            </div>
           </div>
-        </div>
+          <div className='btn-group flex'>
+            <div className='half-width'><button onClick={this.historyHandler}>DONE</button></div>
+            <div className='half-width'><button onClick={this.eraseHistoryHandler}>GET IT OUTTA HERE</button></div>
+          </div>
+
       </div>
-      </Layout>
+    </Layout>
     );
   }
 }
